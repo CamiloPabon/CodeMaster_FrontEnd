@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="hola_mundo"
+        android:label="Code Master"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
