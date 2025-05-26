@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hola_mundo/Screens/home_screen.dart';
 import 'package:hola_mundo/Screens/login_screen.dart';
 import 'package:hola_mundo/Services/auth_service.dart';
-import 'package:hola_mundo/Screens/Ranking_screen.dart';
-import 'package:hola_mundo/Screens/Ranking_screen.dart';
 import 'package:hola_mundo/Services/globals.dart';
-import 'package:http/http.dart' as http;
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -35,7 +32,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       );
 
       final responseMap = jsonDecode(response.body);
-      
+
       if (response.statusCode == 200) {
         if (!mounted) return;
         Navigator.pushReplacement(
@@ -89,11 +86,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     'assets/images/iconLight.png',
                     height: 100,
                     width: 100,
-                    errorBuilder: (context, error, stackTrace) => 
-                      const Icon(Icons.error, size: 100),
+                    errorBuilder:
+                        (context, error, stackTrace) =>
+                            const Icon(Icons.error, size: 100),
                   ),
                   const SizedBox(height: 20),
-                  
+
                   // Título
                   const Text(
                     'CODEA. COMPITE. GANA.',
@@ -105,29 +103,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                   const SizedBox(height: 30),
-                  
+
                   // Subtítulo "CREAR UNA CUENTA"
                   const Text(
                     'Crea tu cuenta',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.black,
-                    ),
+                    style: TextStyle(fontSize: 18, color: Colors.black),
                   ),
                   const SizedBox(height: 10),
-                  
+
                   // Instrucción
                   const Text(
                     'Introduce tus datos para registrarte',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey,
-                    ),
+                    style: TextStyle(fontSize: 14, color: Colors.grey),
                   ),
                   const SizedBox(height: 30),
-                  
+
                   // Campo de nombre
                   TextFormField(
                     controller: _nameController,
@@ -164,15 +156,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       if (value == null || value.isEmpty) {
                         return 'Por favor ingresa tu email';
                       }
-                      if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
-                          .hasMatch(value)) {
+                      if (!RegExp(
+                        r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
+                      ).hasMatch(value)) {
                         return 'Ingresa un email válido';
                       }
                       return null;
                     },
                   ),
                   const SizedBox(height: 20),
-                  
+
                   // Campo de contraseña
                   TextFormField(
                     controller: _passwordController,
@@ -196,48 +189,52 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     },
                   ),
                   const SizedBox(height: 30),
-                  
+
                   // Botón Continuar
                   // Botón Continuar CORREGIDO
-ElevatedButton(
-  onPressed: _isLoading ? null : _createAccount,
-  style: ElevatedButton.styleFrom(
-    backgroundColor: Colors.black,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(10),
-    ),
-    padding: const EdgeInsets.symmetric(vertical: 15),
-  ),
-  child: _isLoading
-      ? const CircularProgressIndicator(color: Colors.white)
-      : const Text(
-          'Continuar',
-          style: TextStyle(
-            fontSize: 16,
-            color: Colors.white,
-          ),
-        ),
-),
+                  ElevatedButton(
+                    onPressed: _isLoading ? null : _createAccount,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.black,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      padding: const EdgeInsets.symmetric(vertical: 15),
+                    ),
+                    child:
+                        _isLoading
+                            ? const CircularProgressIndicator(
+                              color: Colors.white,
+                            )
+                            : const Text(
+                              'Continuar',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.white,
+                              ),
+                            ),
+                  ),
 
-// Enlace a login CORREGIDO
-const SizedBox(height: 20),
-TextButton(
-  onPressed: _isLoading
-      ? null
-      : () => Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) =>LoginScreen(),
-            ),
-          ),
-  child: const Text(
-    '¿Ya tienes una cuenta? Ingresa aquí',
-    style: TextStyle(
-      fontSize: 14,
-      color: Color.fromARGB(255, 41, 41, 41),
-      decoration: TextDecoration.underline,
-    ),
-                   ),
+                  // Enlace a login CORREGIDO
+                  const SizedBox(height: 20),
+                  TextButton(
+                    onPressed:
+                        _isLoading
+                            ? null
+                            : () => Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LoginScreen(),
+                              ),
+                            ),
+                    child: const Text(
+                      '¿Ya tienes una cuenta? Ingresa aquí',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Color.fromARGB(255, 41, 41, 41),
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
                   ),
                 ],
               ),

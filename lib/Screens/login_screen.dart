@@ -1,11 +1,12 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:hola_mundo/Screens/register_screen.dart';
-import 'package:hola_mundo/Screens/Ranking_screen.dart';
 import 'package:hola_mundo/Screens/home_screen.dart';
+import 'package:hola_mundo/Screens/ranking_screen.dart';
+import 'package:hola_mundo/Screens/register_screen.dart';
+//import 'package:hola_mundo/Screens/home_screen.dart';
 import 'package:hola_mundo/Services/auth_service.dart';
 import 'package:hola_mundo/Services/globals.dart';
-import 'package:http/http.dart' as http;
+import 'package:hola_mundo/main.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -33,12 +34,12 @@ class _LoginScreenState extends State<LoginScreen> {
       );
 
       final responseMap = jsonDecode(response.body);
-      
+
       if (response.statusCode == 200) {
         if (!mounted) return;
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const HomeScreen()),
+          MaterialPageRoute(builder: (context) => const MainScreen()),
         );
       } else {
         if (!mounted) return;
@@ -86,11 +87,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     'assets/images/iconLight.png',
                     height: 100,
                     width: 100,
-                    errorBuilder: (context, error, stackTrace) => 
-                      const Icon(Icons.error, size: 100),
+                    errorBuilder:
+                        (context, error, stackTrace) =>
+                            const Icon(Icons.error, size: 100),
                   ),
                   const SizedBox(height: 20),
-                  
+
                   // Título
                   const Text(
                     'CODEA. COMPITE. GANA.',
@@ -102,29 +104,23 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   const SizedBox(height: 30),
-                  
+
                   // Subtítulo
                   const Text(
                     'Ingresar a CodeMaster',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.black,
-                    ),
+                    style: TextStyle(fontSize: 18, color: Colors.black),
                   ),
                   const SizedBox(height: 10),
-                  
+
                   // Instrucción
                   const Text(
                     'Introduce tus datos para entrar',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey,
-                    ),
+                    style: TextStyle(fontSize: 14, color: Colors.grey),
                   ),
                   const SizedBox(height: 30),
-                  
+
                   // Campo de email
                   TextFormField(
                     controller: _emailController,
@@ -141,8 +137,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       if (value == null || value.isEmpty) {
                         return 'Por favor ingresa tu email';
                       }
-                      if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
-                          .hasMatch(value)) {
+                      if (!RegExp(
+                        r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
+                      ).hasMatch(value)) {
                         return 'Ingresa un email válido';
                       }
                       return null;
@@ -162,9 +159,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       fillColor: Colors.grey[200],
                       suffixIcon: IconButton(
                         icon: Icon(
-                          _obscurePassword 
-                            ? Icons.visibility_off 
-                            : Icons.visibility,
+                          _obscurePassword
+                              ? Icons.visibility_off
+                              : Icons.visibility,
                           color: Colors.grey,
                         ),
                         onPressed: () {
@@ -184,7 +181,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                   ),
                   const SizedBox(height: 30),
-                  
+
                   // Botón Continuar
                   ElevatedButton(
                     onPressed: _isLoading ? null : _login,
@@ -195,23 +192,27 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       padding: const EdgeInsets.symmetric(vertical: 15),
                     ),
-                    child: _isLoading
-                        ? const CircularProgressIndicator(color: Colors.white)
-                        : const Text(
-                            'Continuar',
-                            style: TextStyle(
-                              fontSize: 16,
+                    child:
+                        _isLoading
+                            ? const CircularProgressIndicator(
                               color: Colors.white,
+                            )
+                            : const Text(
+                              'Continuar',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.white,
+                              ),
                             ),
-                          ),
                   ),
-                  
+
                   // Enlace a registro
                   const SizedBox(height: 20),
                   TextButton(
-                    onPressed: _isLoading
-                        ? null
-                        : () => Navigator.pushReplacement(
+                    onPressed:
+                        _isLoading
+                            ? null
+                            : () => Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => const RegisterScreen(),

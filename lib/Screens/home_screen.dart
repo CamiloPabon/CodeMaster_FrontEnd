@@ -7,7 +7,8 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -33,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
           children: [
             // Logo centrado absolutamente en toda la pantalla
             Center(
-              child: Container(
+              child: SizedBox(
                 height: 80,
                 child: Image.asset(
                   'assets/images/iconLight.png',
@@ -45,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                 ),
               ),
             ),
-            
+
             // Contenedor para los botones de acción (derecha)
             Positioned(
               right: 0,
@@ -63,7 +64,10 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                       },
                     ),
                     IconButton(
-                      icon: const Icon(Icons.notifications_none_outlined, size: 28),
+                      icon: const Icon(
+                        Icons.notifications_none_outlined,
+                        size: 28,
+                      ),
                       onPressed: () {
                         // Acción de notificaciones
                       },
@@ -72,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                 ),
               ),
             ),
-            
+
             // TabBar en la parte inferior
             Positioned(
               left: 0,
@@ -153,174 +157,163 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
           ),
         ],
       ),
-
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0,
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.grey,
-        showUnselectedLabels: true,
-        type: BottomNavigationBarType.fixed,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Inicio',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.explore_outlined),
-            label: 'Explorar',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add_circle_outline),
-            label: 'Crear',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.bookmark_border),
-            label: 'Guardados',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline),
-            label: 'Perfil',
-          ),
-        ],
-        onTap: (index) {
-          // Lógica para cambiar de pantalla
-        },
-      ),
     );
   }
 
- Widget _buildCourseItem({
-  required String creator,
-  required String title,
-  required bool isPublic,
-  required String timeAgo,
-  required int likes,
-  required int comments,
-  required BuildContext context,
-}) {
-  final ThemeData theme = Theme.of(context);
-  return Card(
-    elevation: 4,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(12)),
-    margin: const EdgeInsets.symmetric(vertical: 8),
-    child: Padding(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              CircleAvatar(
-                radius: 20,
-                backgroundImage: NetworkImage(
-                  // Imagen de perfil aleatoria diferente para cada creador
-                  'https://randomuser.me/api/portraits/${creator == 'Helena' ? 'women/65' : creator == 'Efraín' ? 'men/22' : 'women/33'}.jpg'),
-                onBackgroundImageError: (_, __) {},
-                backgroundColor: Colors.grey[300],
+  Widget _buildCourseItem({
+    required String creator,
+    required String title,
+    required bool isPublic,
+    required String timeAgo,
+    required int likes,
+    required int comments,
+    required BuildContext context,
+  }) {
+    final ThemeData theme = Theme.of(context);
+    return Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                CircleAvatar(
+                  radius: 20,
+                  backgroundImage: NetworkImage(
+                    // Imagen de perfil aleatoria diferente para cada creador
+                    'https://randomuser.me/api/portraits/${creator == 'Helena'
+                        ? 'women/65'
+                        : creator == 'Efraín'
+                        ? 'men/22'
+                        : 'women/33'}.jpg',
+                  ),
+                  onBackgroundImageError: (_, __) {},
+                  backgroundColor: Colors.grey[300],
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '$creator creó el curso $title',
+                        style: theme.textTheme.titleSmall?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      Text(
+                        timeAgo,
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: Colors.grey[600],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.more_horiz),
+                  onPressed: () {},
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Container(
+              height: 180,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                image: DecorationImage(
+                  // Imagen diferente según el título del curso
+                  image: NetworkImage(
+                    title.contains('Flutter')
+                        ? 'https://placehold.co/600x300/1a237e/ffffff?text=Flutter+Course'
+                        : title.contains('Dart')
+                        ? 'https://placehold.co/600x300/01579b/ffffff?text=Dart+Advanced'
+                        : 'https://placehold.co/600x300/4a148c/ffffff?text=UI/UX+Design',
+                  ),
+                  fit: BoxFit.cover,
+                  onError: (_, __) {},
+                ),
               ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '$creator creó el curso $title',
-                      style: theme.textTheme.titleSmall?.copyWith(
-                        fontWeight: FontWeight.bold),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
+            ),
+            const SizedBox(height: 12),
+            Chip(
+              label: Text(
+                isPublic ? 'Curso público' : 'Curso privado',
+                style: TextStyle(
+                  color: isPublic ? Colors.green[700] : Colors.orange[700],
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              backgroundColor:
+                  isPublic ? Colors.green[100] : Colors.orange[100],
+              avatar: Icon(
+                isPublic ? Icons.lock_open_outlined : Icons.lock_outline,
+                size: 16,
+                color: isPublic ? Colors.green[700] : Colors.orange[700],
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            ),
+            const SizedBox(height: 12),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ElevatedButton.icon(
+                  icon: const Icon(Icons.link, size: 18),
+                  label: const Text('Unirse'),
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: theme.colorScheme.secondary,
+                    foregroundColor: theme.colorScheme.onSecondary,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
                     ),
+                    textStyle: const TextStyle(fontWeight: FontWeight.bold),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                ),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.thumb_up_outlined,
+                      size: 20,
+                      color: Colors.grey[700],
+                    ),
+                    const SizedBox(width: 4),
                     Text(
-                      timeAgo,
-                      style: theme.textTheme.bodySmall?.copyWith(
-                        color: Colors.grey[600]),
+                      '$likes',
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: Colors.grey[700],
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Icon(
+                      Icons.comment_outlined,
+                      size: 20,
+                      color: Colors.grey[700],
+                    ),
+                    const SizedBox(width: 4),
+                    Text(
+                      '$comments',
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: Colors.grey[700],
+                      ),
                     ),
                   ],
                 ),
-              ),
-              IconButton(
-                icon: const Icon(Icons.more_horiz),
-                onPressed: () {},
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          Container(
-            height: 180,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              image: DecorationImage(
-                // Imagen diferente según el título del curso
-                image: NetworkImage(
-                  title.contains('Flutter') 
-                    ? 'https://placehold.co/600x300/1a237e/ffffff?text=Flutter+Course'
-                    : title.contains('Dart')
-                      ? 'https://placehold.co/600x300/01579b/ffffff?text=Dart+Advanced'
-                      : 'https://placehold.co/600x300/4a148c/ffffff?text=UI/UX+Design',
-                ),
-                fit: BoxFit.cover,
-                onError: (_, __) {},
-              ),
+              ],
             ),
-          ),
-          const SizedBox(height: 12),
-          Chip(
-            label: Text(
-              isPublic ? 'Curso público' : 'Curso privado',
-              style: TextStyle(
-                color: isPublic ? Colors.green[700] : Colors.orange[700],
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            backgroundColor: isPublic ? Colors.green[100] : Colors.orange[100],
-            avatar: Icon(
-              isPublic ? Icons.lock_open_outlined : Icons.lock_outline,
-              size: 16,
-              color: isPublic ? Colors.green[700] : Colors.orange[700],
-            ),
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-          ),
-          const SizedBox(height: 12),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              ElevatedButton.icon(
-                icon: const Icon(Icons.link, size: 18),
-                label: const Text('Unirse'),
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: theme.colorScheme.secondary,
-                  foregroundColor: theme.colorScheme.onSecondary,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  textStyle: const TextStyle(fontWeight: FontWeight.bold),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-              ),
-              ), 
-              Row(
-                children: [
-                  Icon(Icons.thumb_up_outlined, 
-                      size: 20, color: Colors.grey[700]),
-                  const SizedBox(width: 4),
-                  Text('$likes', 
-                      style: theme.textTheme.bodyMedium?.copyWith(
-                        color: Colors.grey[700])),
-                  const SizedBox(width: 16),
-                  Icon(Icons.comment_outlined, 
-                      size: 20, color: Colors.grey[700]),
-                  const SizedBox(width: 4),
-                  Text('$comments', 
-                      style: theme.textTheme.bodyMedium?.copyWith(
-                        color: Colors.grey[700])),
-                ],
-              ),
-            ],
-          ),
-        ],
+          ],
+        ),
       ),
-    ),
-  );
+    );
   }
 }
