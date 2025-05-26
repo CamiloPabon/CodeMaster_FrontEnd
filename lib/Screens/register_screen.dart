@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:hola_mundo/Screens/home_screen.dart';
 import 'package:hola_mundo/Screens/login_screen.dart';
 import 'package:hola_mundo/Services/auth_service.dart';
-import 'package:hola_mundo/Screens/home_screen.dart';
+import 'package:hola_mundo/Screens/Ranking_screen.dart';
+import 'package:hola_mundo/Screens/Ranking_screen.dart';
 import 'package:hola_mundo/Services/globals.dart';
 import 'package:http/http.dart' as http;
 
