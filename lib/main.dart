@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hola_mundo/Screens/actividades_Screen.dart';
 import 'package:hola_mundo/Screens/login_screen.dart';
 import 'package:hola_mundo/Screens/register_screen.dart';
 import 'Screens/home_screen.dart';
-import 'Screens/Ranking_screen.dart'; // Asegúrate de tener este archivo creado con su contenido
-import 'Screens/login_screen.dart';
+import 'Screens/Ranking_screen.dart';
+//import 'Screens/login_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -35,7 +36,7 @@ class _MainScreenState extends State<MainScreen> {
   // Lista de pantallas para mostrar según el índice del BottomNavigationBar
   final List<Widget> _screens = const [
     HomeScreen(),
-    LoginScreen(), // Cambia a LoginScreen para la pantalla de actividades
+    ActivitiesScreen(), // Cambia a LoginScreen para la pantalla de actividades
     RankingScreen(), // Vista nueva del ranking
     RegisterScreen(),
   ];

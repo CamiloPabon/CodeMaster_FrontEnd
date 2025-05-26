@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:hola_mundo/Screens/home_screen.dart';
-import 'package:hola_mundo/Screens/ranking_screen.dart';
+//import 'package:hola_mundo/Screens/home_screen.dart';
+//import 'package:hola_mundo/Screens/ranking_screen.dart';
 import 'package:hola_mundo/Screens/register_screen.dart';
 //import 'package:hola_mundo/Screens/home_screen.dart';
 import 'package:hola_mundo/Services/auth_service.dart';
