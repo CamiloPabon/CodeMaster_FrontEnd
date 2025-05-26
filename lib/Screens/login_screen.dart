@@ -102,7 +102,8 @@ class LoginScreen extends StatelessWidget {
                     // Lógica para el registro
                     final email = _emailController.text;
                     final password = _passwordController.text;
-                    // Aquí iría tu lógica de autenticación
+                    //* Lógica de autenticación
+                    
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color.fromARGB(255, 0, 0, 0),
