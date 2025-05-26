@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hola_mundo/Screens/login_screen.dart';
-class RegisterScreen extends StatelessWidget {
+import 'package:hola_mundo/Screens/register_screen.dart';
+
+class LoginScreen extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  RegisterScreen({super.key});
+  LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class RegisterScreen extends StatelessWidget {
                 
                 //! Subtítulo "CREAR UNA CUENTA"
                 const Text(
-                  'Crea tu cuenta',
+                  'Ingresar a CodeMaster',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 18,
@@ -56,7 +56,7 @@ class RegisterScreen extends StatelessWidget {
                 
                 //! Instrucción "INTRODUCE TU EMAIL PARA REGISTRARTE"
                 const Text(
-                  'Introduce tus datos para registrarte',
+                  'Introduce tus datos para entrar',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 14,
@@ -77,21 +77,6 @@ class RegisterScreen extends StatelessWidget {
                     fillColor: Colors.grey[200],
                   ),
                   keyboardType: TextInputType.emailAddress,
-                ),
-                const SizedBox(height: 20),
-                
-                //! Campo de nombre
-                TextField(
-                  controller: _nameController,
-                  decoration: InputDecoration(
-                    hintText: 'Nombre',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    filled: true,
-                    fillColor: Colors.grey[200],
-                  ),
-                  keyboardType: TextInputType.text,
                 ),
                 const SizedBox(height: 20),
 
@@ -117,7 +102,6 @@ class RegisterScreen extends StatelessWidget {
                     // Lógica para el registro
                     final email = _emailController.text;
                     final password = _passwordController.text;
-                    final name = _nameController.text;
                     // Aquí iría tu lógica de autenticación
                   },
                   style: ElevatedButton.styleFrom(
@@ -141,10 +125,10 @@ class RegisterScreen extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     // Navegar a la pantalla de login
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterScreen()));
                   },
                   child: const Text(
-                    '¿Ya tienes una cuenta? Ingresa aquí',
+                    '¿Aun no tienes una cuenta? Ingresa aquí para registrarte',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 14,
